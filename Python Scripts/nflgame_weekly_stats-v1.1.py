@@ -1,17 +1,3 @@
-#     Copyright [yyyy] [name of copyright owner]
-# 
-#     Licensed under the Apache License, Version 2.0 (the "License");
-#     you may not use this file except in compliance with the License.
-#     You may obtain a copy of the License at
-# 
-#        http://www.apache.org/licenses/LICENSE-2.0
-# 
-#     Unless required by applicable law or agreed to in writing, software
-#     distributed under the License is distributed on an "AS IS" BASIS,
-#     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#     See the License for the specific language governing permissions and
-#     limitations under the License.
-
 """
 Use nflgame api to pull out and compile stats. Export to .csv ready to be used with Erudite
 """
@@ -22,9 +8,10 @@ import csv
 
 print 'nflgame API loaded and updated'
 week = raw_input('What week of the season, 1-17?: ')
-filename = 'nfl_weeklystats_week' + str(week) + '.txt'
+filename = 'nfl_weeklystats_week' + str(week) + '.csv'
 f = open(filename,'a')
 numGames = raw_input('Enter the number of games to gather data for: ')
+f.write(numGames + ',12\n')
 for i in range(int(numGames)):
         awayTeam = raw_input('Enter the AWAY team: ').upper()
         homeTeam = raw_input('Enter the HOME team: ').upper()
@@ -159,31 +146,9 @@ for i in range(int(numGames)):
         print homeTeam + ' QBR: ' + str(HT_QBR) + '\t' + awayTeam + ' QBR: ' + str(AT_QBR)
         print '-----------------------------------------------------\n'
         print 'Writing data to file...'
-        f.write('\nGame data for: ' + homeTeam + '(HOME)' + ' vs. ' + awayTeam + '(AWAY)' + '\n')
-        f.write('-----------------------------------------------------\n')
-        f.write(homeTeam + ' YPG: ' + str(HT_YPG) + '\t' + awayTeam + ' YPG: ' + str(AT_YPG)+ '\n')
-        f.write(homeTeam + ' PPG: ' + str(HT_PPG) + '\t' + awayTeam + ' PPG: ' + str(AT_PPG)+ '\n')
-        f.write(homeTeam + ' TO +/-: ' + str(HT_TOpm) + '\t' + awayTeam + ' TO +/-: ' + str(AT_TOpm)+ '\n')
-        f.write(homeTeam + ' YPG-A: ' + str(HT_YPGA) + '\t' + awayTeam + ' YPG-A: ' + str(AT_YPGA)+ '\n')
-        f.write(homeTeam + ' PPG-A: ' + str(HT_PPGA) + '\t' + awayTeam + ' PPG-A: ' + str(AT_PPGA)+ '\n')
-        f.write(homeTeam + ' QBR: ' + str(HT_QBR) + '\t' + awayTeam + ' QBR: ' + str(AT_QBR)+ '\n')
-        f.write('-----------------------------------------------------\n')
-        f.write('Input data for: ' + homeTeam + '(HOME)' + ' vs. ' + awayTeam + '(AWAY)\n')
-        f.write('-----------------------------------------------------\n')
-        f.write('IN001: ' + str(HT_YPG/Decimal(1000))+ '\n')
-        f.write('IN002: ' + str(HT_YPGA/Decimal(1000))+ '\n')
-        f.write('IN003: ' + str(HT_TOpm/Decimal(10))+ '\n')
-        f.write('IN004: ' + str(HT_QBR/Decimal(100))+ '\n')
-        f.write('IN005: ' + str(HT_PPG/Decimal(100))+ '\n')
-        f.write('IN006: ' + str(HT_PPGA/Decimal(100))+ '\n')
-        f.write('IN007: ' + str(AT_YPG/Decimal(1000))+ '\n')
-        f.write('IN008: ' + str(AT_YPGA/Decimal(1000))+ '\n')
-        f.write('IN009: ' + str(AT_TOpm/Decimal(10))+ '\n')
-        f.write('IN010: ' + str(AT_QBR/Decimal(100))+ '\n')
-        f.write('IN011: ' + str(AT_PPG/Decimal(100))+ '\n')
-        f.write('IN012: ' + str(AT_PPGA/Decimal(100))+ '\n')
-
+        f.write(homeTeam + '(HOME)' + ' vs. ' + awayTeam + '(AWAY)\n')
+        f.write(str(HT_YPG/Decimal(1000))+',' + str(HT_YPGA/Decimal(1000))+',' + str(HT_TOpm/Decimal(10))+',' + str(HT_QBR/Decimal(100))+',' + str(HT_PPG/Decimal(100))+ ','+ str(HT_PPGA/Decimal(100))+',' + str(AT_YPG/Decimal(1000))+ ','+ str(AT_YPGA/Decimal(1000))+',' + str(AT_TOpm/Decimal(10))+',' + str(AT_QBR/Decimal(100))+',' + str(AT_PPG/Decimal(100)) + ','+ str(AT_PPGA/Decimal(100))+ '\n')
 print 'Done Compiling weekly game data...'
-print 'Done exporting to .txt file...'
+print 'Done exporting to .csv file...'
 f.close()
 print 'All done.'

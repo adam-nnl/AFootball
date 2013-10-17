@@ -1,17 +1,3 @@
-#     limitations under the License.
-#     See the License for the specific language governing permissions and
-#     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#     distributed under the License is distributed on an "AS IS" BASIS,
-#     Unless required by applicable law or agreed to in writing, software
-# 
-#        http://www.apache.org/licenses/LICENSE-2.0
-# 
-#     You may obtain a copy of the License at
-#     you may not use this file except in compliance with the License.
-#     Licensed under the Apache License, Version 2.0 (the "License");
-# 
-#     Copyright [yyyy] [name of copyright owner]
-
 """
 Use nflgame api to pull out and compile stats. Export to .csv ready to be used with Erudite
 """
@@ -19,6 +5,7 @@ from decimal import Decimal, ROUND_DOWN
 import nflgame
 import csv
 import sys
+import fileinput
 
 def query_yes_no(question, default="yes"):
     """Ask a yes/no question via raw_input() and return their answer.
@@ -56,7 +43,7 @@ print 'nflgame API loaded'
 print 'Compiling training sets...'
 print 'Compiling traing set for 2009 NFL season...'
 season2009 = nflgame.games_gen(2009, week=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], kind="REG")
-f = open('nfl2009ts_tanh_scrubbed.csv','w')
+f = open('nfl2009ts_tanh_scrubbed-v1.1.csv','w')
 result = ''
 exampleCount = 0
 for g in season2009:
@@ -223,9 +210,10 @@ for g in season2009:
         print '-----------------------------------------------------\n'
         choice = query_yes_no("Add game as example to training set?")
         if choice:
-                result = str(result)+','+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TOpm/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TOpm/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+','+ str(HT_WL)+','+ str(AT_WL)
+                result = str(result)+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TOpm/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TOpm/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+'\n'
+                result = str(result)+str(HT_WL)+','+ str(AT_WL)+'\n'
                 exampleCount += 1
-TSheader = str(exampleCount)+',12,2'     
+TSheader = str(exampleCount)+',12,2\n'     
 result = str(TSheader) + str(result)
 f.write(result)
 print 'Done Compiling season data...'
@@ -233,7 +221,7 @@ print 'Done exporting to .csv file...'
 f.close()
 print 'Compiling traing set for 2010 NFL season...'
 season2009 = nflgame.games_gen(2010, week=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], kind="REG")
-f = open('nfl2010ts_tanh_scrubbed.csv','w')
+f = open('nfl2010ts_tanh_scrubbed-v1.1.csv','w')
 result = ''
 exampleCount = 0
 for g in season2009:
@@ -400,16 +388,17 @@ for g in season2009:
         print '-----------------------------------------------------\n'
         choice = query_yes_no("Add game as example to training set?")
         if choice:
-                result = str(result)+','+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TOpm/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TOpm/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+','+ str(HT_WL)+','+ str(AT_WL)
+                result = str(result)+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TOpm/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TOpm/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+'\n'
+                result = str(result)+str(HT_WL)+','+ str(AT_WL)+'\n'
                 exampleCount += 1
-TSheader = str(exampleCount)+',12,2'     
+TSheader = str(exampleCount)+',12,2\n'     
 result = str(TSheader) + str(result)
 f.write(result)
 print 'Done Compiling season data...'
 print 'Exporting to .csv file...'
 print 'Compiling traing set for 2011 NFL season...'
 season2009 = nflgame.games_gen(2011, week=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], kind="REG")
-f = open('nfl2011ts_tanh_scrubbed.csv','w')
+f = open('nfl2011ts_tanh_scrubbed-v1.1.csv','w')
 result = ''
 exampleCount = 0
 for g in season2009:
@@ -576,16 +565,17 @@ for g in season2009:
         print '-----------------------------------------------------\n'
         choice = query_yes_no("Add game as example to training set?")
         if choice:
-                result = str(result)+','+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TOpm/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TOpm/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+','+ str(HT_WL)+','+ str(AT_WL)
+                result = str(result)+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TOpm/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TOpm/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+'\n'
+                result = str(result)+str(HT_WL)+','+ str(AT_WL)+'\n'
                 exampleCount += 1
-TSheader = str(exampleCount)+',12,2'     
+TSheader = str(exampleCount)+',12,2\n'     
 result = str(TSheader) + str(result)
 f.write(result)
 print 'Done Compiling season data...'
 print 'Exporting to .csv file...'
 print 'Compiling traing set for 2012 NFL season...'
 season2009 = nflgame.games_gen(2012, week=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], kind="REG")
-f = open('nfl2012ts_tanh_scrubbed.csv','w')
+f = open('nfl2012ts_tanh_scrubbed-v1.1.csv','w')
 result = ''
 exampleCount = 0
 for g in season2009:
@@ -752,13 +742,11 @@ for g in season2009:
         print '-----------------------------------------------------\n'
         choice = query_yes_no("Add game as example to training set?")
         if choice:
-                result = str(result)+','+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TOpm/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TOpm/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+','+ str(HT_WL)+','+ str(AT_WL)
+                result = str(result)+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TOpm/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TOpm/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+'\n'
+                result = str(result)+str(HT_WL)+','+ str(AT_WL)+'\n'
                 exampleCount += 1
-TSheader = str(exampleCount)+',12,2'     
+TSheader = str(exampleCount)+',12,2\n'     
 result = str(TSheader) + str(result)
 f.write(result)
 print 'Done Compiling season data...'
 print 'Exporting to .csv file...'
-print 'All done.'
-#export to .csv
-#move on to next season, rinse, repeat
