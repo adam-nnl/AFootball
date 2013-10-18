@@ -19,6 +19,14 @@ Requirements:
 - Erudite Neural Network Suite
 
 
-File and Directories:
+File and Directories Purposes:
 ============
 
+- ANNeML Files
+- Pythons Scripts
+- Training Sets
+- AFootball_training_results.xlsx
+- AFootball_testing_results.xlsx
+- nfl_weeklystats_wk5.txt
+- nfl_weeklystats_wk6.txt
+- nfl_weeklystats_week7.csv
