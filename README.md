@@ -6,7 +6,7 @@ Small project using <a href="https://github.com/adam-nnl/ANNeML" target="_BLANK"
 game outcomes. 
 
 Home team and away team statistics(YPG, TO+/-, QBR, PPG, PPG-A, YPG-A) are inputted to the neural network and one of the
-two output nodes representing the home and away team will "fire"(output close to 1.0) to indicat a predicted win. Example,
+two output nodes representing the home and away team will "fire"(output close to 1.0) to indicating a predicted win. Example,
 SEA @ ARI; stats are inputted; neural net is run; output node value for away team=0.99898; output node value for home
 team=0.001938; neural network is predicting away(SEA) team to win and home(ARI) team to lose.
 
