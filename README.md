@@ -36,3 +36,4 @@ File and Directories Purposes:
 - nfl_weeklystats_wk5.txt: Prediction test set data for NFL week 5 for manual entry
 - nfl_weeklystats_wk6.txt Prediction test set data for NFL week 6 for manual entry
 - nfl_weeklystats_week7.csv Prediction test set data for NFL week 7  in .csv form for batch entry
+- nfl_weeklystats_week8.csv Prediction test set data for NFL week 8  in .csv form for batch entry
