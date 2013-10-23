@@ -16,19 +16,19 @@ f.write(numGames + ',12\n')
 for i in range(int(numGames)):
         awayTeam = raw_input('Enter the AWAY team: ').upper()
         homeTeam = raw_input('Enter the HOME team: ').upper()
-        HT_AVG1 = nflgame.games_gen(2013, home=homeTeam, kind="REG")
+        HT_AVG1 = nflgame.games_gen(2013, home=homeTeam, away=homeTeam, kind="REG")
         QBs = nflgame.combine(HT_AVG1)
         print 'Which HOME QB statistics to use?'
-        for p in QBs.passing().filter(home=True).sort("passing_att"):
+        for p in QBs.passing().sort("passing_att"):
                 print p
         QBname = raw_input('Enter the quarterback name as it is written: ')        
         QB_AVG = nflgame.games_gen(2013, kind="REG")
         playerStats = nflgame.combine(QB_AVG)
         QBplayer = playerStats.name(QBname)
-        AT_AVG1 = nflgame.games_gen(2013, home=awayTeam, kind="REG")
+        AT_AVG1 = nflgame.games_gen(2013, home=awayTeam, away=awayTeam, kind="REG")
         aQBs = nflgame.combine(AT_AVG1)
         print 'Which AWAY QB statistics to use?'
-        for p in aQBs.passing().filter(home=True).sort("passing_att"):
+        for p in aQBs.passing().sort("passing_att"):
                 print p
         aQBname = raw_input('Enter the quarterback name as it is written: ')        
         aQB_AVG = nflgame.games_gen(2013, kind="REG")
