@@ -43,7 +43,7 @@ print 'nflgame API loaded'
 print 'Compiling training sets...'
 print 'Compiling traing set for 2009 NFL season...'
 season2009 = nflgame.games_gen(2009, kind="REG")
-f = open('nfl2009ts_logsig_scrubbed-14i-v1.1.csv','w')
+f = open('nfl2009ts_logsig_unscrubbed-14i-v1.1.csv','w')
 result = ''
 exampleCount = 0
 for g in season2009:
@@ -206,9 +206,9 @@ for g in season2009:
         #        print g.home + ' ***TO +/-: ' + str(HT_TOpm) + '\t' + g.away + ' TO +/-: ' + str(AT_TOpm)
         #elif AT_TOpm > HT_TOpm:
         #        print g.home + ' TO +/-: ' + str(HT_TOpm) + '\t' + g.away + ' ***TO +/-: ' + str(AT_TOpm)
-        if HT_TO < AT_TO:
+        if HT_TO > AT_TO:
                 print g.home + ' ***TOpg: ' + str(HT_TO) + '\t' + g.away + ' TOpg: ' + str(AT_TO)
-        elif AT_TO < HT_TO:
+        elif AT_TO > HT_TO:
                 print g.home + ' TOpg: ' + str(HT_TO) + '\t' + g.away + ' ***TOpg: ' + str(AT_TO)
         if HT_TA > AT_TA:
                 print g.home + ' ***TApg: ' + str(HT_TA) + '\t' + g.away + ' TApg: ' + str(AT_TA)
@@ -232,11 +232,14 @@ for g in season2009:
                 print 'HOME W/L: ' + str(HT_WL) + '\t' + '***AWAY W/L: ' + str(AT_WL)        
         print 'HOME FINAL: ' + str(g.score_home) + '\t' + 'AWAY FINAL: ' + str(g.score_away)        
         print '-----------------------------------------------------\n'
-        choice = query_yes_no("Add game as example to training set?")
-        if choice:
-                result = str(result)+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TO/Decimal(10))+','+ str(HT_TA/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TO/Decimal(10))+','+ str(AT_TA/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+'\n'
-                result = str(result)+str(HT_WL)+','+ str(AT_WL)+'\n'
-                exampleCount += 1
+        #choice = query_yes_no("Add game as example to training set?")
+        #if choice:
+        #        result = str(result)+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TO/Decimal(10))+','+ str(HT_TA/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TO/Decimal(10))+','++ str(AT_TA/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+'\n'
+        #        result = str(result)+str(HT_WL)+','+ str(AT_WL)+'\n'
+        #        exampleCount += 1
+        result = str(result)+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TO/Decimal(10))+','+ str(HT_TA/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TO/Decimal(10))+','+ str(AT_TA/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+'\n'
+        result = str(result)+str(HT_WL)+','+ str(AT_WL)+'\n'
+        exampleCount += 1        
 TSheader = str(exampleCount)+',14,2\n'     
 result = str(TSheader) + str(result)
 f.write(result)
@@ -245,7 +248,7 @@ print 'Done exporting to .csv file...'
 f.close()
 print 'Compiling traing set for 2010 NFL season...'
 season2009 = nflgame.games_gen(2010, kind="REG")
-f = open('nfl2010ts_logsig_scrubbed-14i-v1.1.csv','w')
+f = open('nfl2010ts_logsig_unscrubbed-14i-v1.1.csv','w')
 result = ''
 exampleCount = 0
 for g in season2009:
@@ -408,9 +411,9 @@ for g in season2009:
         #        print g.home + ' ***TO +/-: ' + str(HT_TOpm) + '\t' + g.away + ' TO +/-: ' + str(AT_TOpm)
         #elif AT_TOpm > HT_TOpm:
         #        print g.home + ' TO +/-: ' + str(HT_TOpm) + '\t' + g.away + ' ***TO +/-: ' + str(AT_TOpm)
-        if HT_TO < AT_TO:
+        if HT_TO > AT_TO:
                 print g.home + ' ***TOpg: ' + str(HT_TO) + '\t' + g.away + ' TOpg: ' + str(AT_TO)
-        elif AT_TO < HT_TO:
+        elif AT_TO > HT_TO:
                 print g.home + ' TOpg: ' + str(HT_TO) + '\t' + g.away + ' ***TOpg: ' + str(AT_TO)
         if HT_TA > AT_TA:
                 print g.home + ' ***TApg: ' + str(HT_TA) + '\t' + g.away + ' TApg: ' + str(AT_TA)
@@ -434,11 +437,9 @@ for g in season2009:
                 print 'HOME W/L: ' + str(HT_WL) + '\t' + '***AWAY W/L: ' + str(AT_WL)        
         print 'HOME FINAL: ' + str(g.score_home) + '\t' + 'AWAY FINAL: ' + str(g.score_away)        
         print '-----------------------------------------------------\n'
-        choice = query_yes_no("Add game as example to training set?")
-        if choice:
-                result = str(result)+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TO/Decimal(10))+','+ str(HT_TA/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TO/Decimal(10))+','+ str(AT_TA/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+'\n'
-                result = str(result)+str(HT_WL)+','+ str(AT_WL)+'\n'
-                exampleCount += 1
+        result = str(result)+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TO/Decimal(10))+','+ str(HT_TA/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TO/Decimal(10))+','+ str(AT_TA/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+'\n'
+        result = str(result)+str(HT_WL)+','+ str(AT_WL)+'\n'
+        exampleCount += 1 
 TSheader = str(exampleCount)+',14,2\n'      
 result = str(TSheader) + str(result)
 f.write(result)
@@ -446,7 +447,7 @@ print 'Done Compiling season data...'
 print 'Exporting to .csv file...'
 print 'Compiling traing set for 2011 NFL season...'
 season2009 = nflgame.games_gen(2011, kind="REG")
-f = open('nfl2011ts_logsig_scrubbed-14i-v1.1.csv','w')
+f = open('nfl2011ts_logsig_unscrubbed-14i-v1.1.csv','w')
 result = ''
 exampleCount = 0
 for g in season2009:
@@ -609,9 +610,9 @@ for g in season2009:
         #        print g.home + ' ***TO +/-: ' + str(HT_TOpm) + '\t' + g.away + ' TO +/-: ' + str(AT_TOpm)
         #elif AT_TOpm > HT_TOpm:
         #        print g.home + ' TO +/-: ' + str(HT_TOpm) + '\t' + g.away + ' ***TO +/-: ' + str(AT_TOpm)
-        if HT_TO < AT_TO:
+        if HT_TO > AT_TO:
                 print g.home + ' ***TOpg: ' + str(HT_TO) + '\t' + g.away + ' TOpg: ' + str(AT_TO)
-        elif AT_TO < HT_TO:
+        elif AT_TO > HT_TO:
                 print g.home + ' TOpg: ' + str(HT_TO) + '\t' + g.away + ' ***TOpg: ' + str(AT_TO)
         if HT_TA > AT_TA:
                 print g.home + ' ***TApg: ' + str(HT_TA) + '\t' + g.away + ' TApg: ' + str(AT_TA)
@@ -635,11 +636,9 @@ for g in season2009:
                 print 'HOME W/L: ' + str(HT_WL) + '\t' + '***AWAY W/L: ' + str(AT_WL)        
         print 'HOME FINAL: ' + str(g.score_home) + '\t' + 'AWAY FINAL: ' + str(g.score_away)        
         print '-----------------------------------------------------\n'
-        choice = query_yes_no("Add game as example to training set?")
-        if choice:
-                result = str(result)+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TO/Decimal(10))+','+ str(HT_TA/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TO/Decimal(10))+','+ str(AT_TA/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+'\n'
-                result = str(result)+str(HT_WL)+','+ str(AT_WL)+'\n'
-                exampleCount += 1
+        result = str(result)+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TO/Decimal(10))+','+ str(HT_TA/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TO/Decimal(10))+','+ str(AT_TA/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+'\n'
+        result = str(result)+str(HT_WL)+','+ str(AT_WL)+'\n'
+        exampleCount += 1 
 TSheader = str(exampleCount)+',14,2\n'     
 result = str(TSheader) + str(result)
 f.write(result)
@@ -647,7 +646,7 @@ print 'Done Compiling season data...'
 print 'Exporting to .csv file...'
 print 'Compiling traing set for 2012 NFL season...'
 season2009 = nflgame.games_gen(2012, kind="REG")
-f = open('nfl2012ts_logsig_scrubbed-14i-v1.1.csv','w')
+f = open('nfl2012ts_logsig_unscrubbed-14i-v1.1.csv','w')
 result = ''
 exampleCount = 0
 for g in season2009:
@@ -810,9 +809,9 @@ for g in season2009:
         #        print g.home + ' ***TO +/-: ' + str(HT_TOpm) + '\t' + g.away + ' TO +/-: ' + str(AT_TOpm)
         #elif AT_TOpm > HT_TOpm:
         #        print g.home + ' TO +/-: ' + str(HT_TOpm) + '\t' + g.away + ' ***TO +/-: ' + str(AT_TOpm)
-        if HT_TO < AT_TO:
+        if HT_TO > AT_TO:
                 print g.home + ' ***TOpg: ' + str(HT_TO) + '\t' + g.away + ' TOpg: ' + str(AT_TO)
-        elif AT_TO < HT_TO:
+        elif AT_TO > HT_TO:
                 print g.home + ' TOpg: ' + str(HT_TO) + '\t' + g.away + ' ***TOpg: ' + str(AT_TO)
         if HT_TA > AT_TA:
                 print g.home + ' ***TApg: ' + str(HT_TA) + '\t' + g.away + ' TApg: ' + str(AT_TA)
@@ -836,11 +835,9 @@ for g in season2009:
                 print 'HOME W/L: ' + str(HT_WL) + '\t' + '***AWAY W/L: ' + str(AT_WL)        
         print 'HOME FINAL: ' + str(g.score_home) + '\t' + 'AWAY FINAL: ' + str(g.score_away)        
         print '-----------------------------------------------------\n'
-        choice = query_yes_no("Add game as example to training set?")
-        if choice:
-                result = str(result)+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TO/Decimal(10))+','+ str(HT_TA/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TO/Decimal(10))+','+ str(AT_TA/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+'\n'
-                result = str(result)+str(HT_WL)+','+ str(AT_WL)+'\n'
-                exampleCount += 1
+        result = str(result)+str(HT_YPG/Decimal(1000))+','+ str(HT_YPGA/Decimal(1000))+','+ str(HT_TO/Decimal(10))+','+ str(HT_TA/Decimal(10))+','+ str(HT_QBR/Decimal(100))+','+ str(HT_PPG/Decimal(100))+','+ str(HT_PPGA/Decimal(100))+','+ str(AT_YPG/Decimal(1000))+','+ str(AT_YPGA/Decimal(1000))+','+ str(AT_TO/Decimal(10))+','+ str(AT_TA/Decimal(10))+','+ str(AT_QBR/Decimal(100))+','+ str(AT_PPG/Decimal(100))+','+ str(AT_PPGA/Decimal(100))+'\n'
+        result = str(result)+str(HT_WL)+','+ str(AT_WL)+'\n'
+        exampleCount += 1 
 TSheader = str(exampleCount)+',14,2\n'     
 result = str(TSheader) + str(result)
 f.write(result)
